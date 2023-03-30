@@ -14,6 +14,7 @@ public class ArrayList<T> implements List<T> {
     private static final int DEFAULT_INITIAL_CAPACITY = 10;
     private T[] elements;
     private int size;
+    private int nextAvailableIndex;
 
     private int moveElementCounter;
     private int expandCounter;
@@ -47,12 +48,58 @@ public class ArrayList<T> implements List<T> {
         elements[size-1] = null;
     }
 
+    @Override
+    public void add(T element) {
+        checkCapacityAndExpand(); // expand
+        elements[size++] = element; // set element and increase size
+    }
+
+    @Override
+    public void add(int position, T element) {
+        checkCapacityAndExpand(); // expand
+        shift(position); // shift
+        elements[position] = element; // set element
+        size++; // increase size
+    }
+
+
+    @Override
+    public T remove(int position) {
+        T tmp = elements[position];
+        unshift(position);
+        size--;
+        return tmp;
+    }
+
+    @Override
+    public T get(int position) {
+        return elements[position];
+    }
+
+    @Override
+    public T set(int position, T element) {
+        T tmp = elements[position];
+        elements[position] = element;
+        return tmp;
+    }
+
     /**
      * Checks for the need to expand the elements array and if necessary:
      *  - allocates a new array with new size
      *  - copies the current data from the previous elements into the new array
      */
     private void checkCapacityAndExpand() {
+        // how we did it in class:
+        if(size == elements.length){
+            int newCapacity = size * 2; // TODO: alternatives?
+            T[] newElements = (T[]) new Object[newCapacity];
+
+            for (int i = 0; i < size; i++)
+                newElements[i] = elements[i];
+            // System.arraycopy(elements, 0, newElements, 0, size);
+
+            elements = newElements;
+        }
 
     }
 
@@ -89,16 +136,6 @@ public class ArrayList<T> implements List<T> {
 
 
     @Override
-    public void add(T element) {
-
-    }
-
-    @Override
-    public void add(int position, T element) {
-
-    }
-
-    @Override
     public void reset() {
 
     }
@@ -115,27 +152,13 @@ public class ArrayList<T> implements List<T> {
 
 
     @Override
-    public T remove(int position) {
-        return null;
-    }
-
-    @Override
     public void clear() {
 
     }
 
-    @Override
-    public T get(int position) {
-        return null;
-    }
-
-    @Override
-    public T set(int position, T element) {
-        return null;
-    }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 }
