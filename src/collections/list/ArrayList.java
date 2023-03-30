@@ -89,8 +89,18 @@ public class ArrayList<T> implements List<T> {
 
 
     @Override
+    public void add(T element) {
+
+    }
+
+    @Override
+    public void add(int position, T element) {
+
+    }
+
+    @Override
     public void reset() {
-        
+
     }
 
     @Override
@@ -103,15 +113,6 @@ public class ArrayList<T> implements List<T> {
         return false;
     }
 
-    @Override
-    public void add(T element) {
-
-    }
-
-    @Override
-    public void add(int position, T element) {
-
-    }
 
     @Override
     public T remove(int position) {
