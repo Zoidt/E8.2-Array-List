@@ -24,8 +24,6 @@ Now that we've learned about `LinkedList`, let's go back to our friend the `Arra
 
 ![Array List](./images/Array-List-1.png)
 
-Not an array in site! This is not to say that arrays are bad, it's simply another way to think of data structures.
-
 To implement the list API in a comparable way to the LinkedList we should not run out of cells to put data, i.e.: there is no "capacity". Unless we do something, we will eventually run out of space in our array:
 
 ![Array List 2](./images/Array-List-2.png)
